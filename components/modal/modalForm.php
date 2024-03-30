@@ -1,11 +1,3 @@
-<script>
-  function closeModal() {
-    console.log(document.getElementById("title").value = "");
-    console.log(document.getElementById("description").value = "");
-    document.getElementById("containerModal").style.display = "none";
-  }
-</script>
-
 <div class="modal" id="containerModal">
   <form method="post" id="postsForm">
     <h1>Novo Post</h1><br>

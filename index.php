@@ -1,6 +1,6 @@
 <?php
-  require_once("./db.php");
-  require_once("insert.php")
+  require_once("db.php");
+  require_once("./components/modal/modalForm.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,9 +14,6 @@
   <title>My Posts</title>
 </head>
 <body>
-  <?php
-    require_once("./modalForm.php")
-  ?>
   <div class="container">
     <nav class="nav">
       <h1>My Posts</h1>
@@ -31,14 +28,10 @@
     </nav>
     <div class="posts">
       <?php
-        require_once("./posts.php");
+        require_once("./components/posts/posts.php");
       ?>
     </div>
   </div>
 </body>
-<script>
-  function openModal() {
-    document.getElementById("containerModal").style.display = "flex";
-  }
-</script>
+<script src="script.js"></script>
 </html>
