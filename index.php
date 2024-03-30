@@ -1,6 +1,6 @@
 <?php
-  require_once("db.php");
-  require_once("./components/modal/modalForm.php");
+  require_once("./config/db.php");
+  require_once("./app/controllers/insertPostsController.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -19,19 +19,38 @@
       <h1>My Posts</h1>
       <div class="nav-buttons">
         <button class="add" onclick="openModal()">
-          <img src="./img/add.svg" alt="Add" width="24px" height="24px">
+          <img src="./assets/add.svg" alt="Add" width="24px" height="24px">
         </button>
         <button class="remove">
-          <img src="./img/trash.svg" alt="Trash" width="24px" height="24px">
+          <img src="./assets/trash.svg" alt="Trash" width="24px" height="24px">
         </button>
       </div>
     </nav>
     <div class="posts">
       <?php
-        require_once("./components/posts/posts.php");
+        require_once("./app/views/posts/post.php");
       ?>
     </div>
   </div>
+  
+
+  <!--INICIO MODAL FORMULÁRIO-->
+  <div class="modal" id="containerModal">
+    <form method="post" id="postsForm">
+      <h1>Novo Post</h1><br>
+      
+      <label for="title">Titulo<span> *</span></label>  
+      <input name="title" id="title" placeholder="Titulo" value="" form="postsForm" maxlength="64" type="text">
+
+      <label for="description">Description<span> *</span></label>  
+      <textarea name="description" form="postsForm" value="" id="description" maxlength="512" placeholder="Descrição" cols="30" rows="10"></textarea><br>
+
+      <button id="submit" type="submit">Adicionar</button>
+      <button id="cancel" type="button" onclick="closeModal()">Cancelar</button>
+    </form>
+  </div> 
+  <!--FIM MODAL FORMULÁRIO-->
+  
 </body>
 <script src="script.js"></script>
 </html>
