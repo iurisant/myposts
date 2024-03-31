@@ -75,6 +75,7 @@ nav button {
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   margin-top: 24px;
   overflow-y: scroll !important;
+  border-radius: 24px;
 }
 
 @media (max-width: 500px) {
@@ -190,4 +191,9 @@ nav button {
 
 .modal form button#cancel:hover {
   background-color: #8a3333;
+}
+
+.destaque {
+  box-shadow: #0067C0 0px 0px 0px 2px inset;
+  background-color: #0067c014 !important;
 }

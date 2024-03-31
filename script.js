@@ -1,32 +1,35 @@
-var longClickTimer;
-var targetElements = document.querySelectorAll(".post");
+$(document).ready(function () {
+  var longPressTimer;
 
-if (targetElements.length > 0) {
-  targetElements.forEach(function (targetElement) {
-    targetElement.addEventListener("mousedown", function (event) {
-      longClickTimer = setTimeout(function () {
-        var selected = document.getElementById(event.target.id).style;
-        if (selected.boxShadow != "") {
-          selected.boxShadow = "";
-          selected.backgroundColor = "var(--tertiary-color)"
-        } else {
-
-
-          selected.boxShadow = "#0067C0 0px 0px 0px 2px inset";
-          selected.backgroundColor = "#0067c014"
+  $('.post').on('mousedown', function () {
+    longPressTimer = setTimeout(function () {
+      var id = $(this).attr('id');
+      var action = $(this).hasClass('destaque') ? 'remover' : 'adicionar';
+      $.ajax({
+        url: './app/controllers/selectedPostsController.php',
+        method: 'POST',
+        data: { id: id, action: action },
+        success: function (response) {
+          if (action === 'adicionar') {
+            $(this).addClass('destaque');
+          } else {
+            $(this).removeClass('destaque');
+          }
+          console.log(response)
+        }.bind(this),
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
         }
-      }, 500);
-    });
-
-    targetElement.addEventListener("mouseup", function (event) {
-      clearTimeout(longClickTimer);
-    });
+      });
+    }.bind(this), 400); // 1000ms = 1 segundo
+  }).on('mouseup mouseleave', function () {
+    clearTimeout(longPressTimer);
   });
-}
+});
 
 function closeModal() {
-  console.log(document.getElementById("title").value = "");
-  console.log(document.getElementById("description").value = "");
+  document.getElementById("title").value = "";
+  document.getElementById("description").value = "";
   document.getElementById("containerModal").style.display = "none";
 }
 
